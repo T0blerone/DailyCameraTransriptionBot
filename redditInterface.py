@@ -15,10 +15,10 @@ test = reddit.subreddit("test") #Creating an instance for the test subreddit (fo
 test2 = reddit.subreddit("funny")
 post_link = "" #Holds the link embedded in a post. Is reset for every new post.
 daily_camera_detector = -2 #Holds a number that is set if program finds it to be a daily camera link. Is reset for every new post.
+content_to_be_posted = ""
 
 
 for submission in test.stream.submissions(skip_existing = True): #Opens a stream that checks every new post in selected subreddit.
-    
     if not submission.is_self: #Only processes posts that contain a link outside of reddit (eg to a news website like daily camera)
     #Validates if the link-post is a link to the daily camera.
         post_link = submission.url #Saves the link contained in the post.
@@ -28,3 +28,12 @@ for submission in test.stream.submissions(skip_existing = True): #Opens a stream
         #Parse data from the article at post it in the comments of the matching post.
             current_article = Articles(post_link)
             #TODO - format a post for reddit and submit it to the comments with article info.
+            content_to_be_posted = "#["
+            content_to_be_posted += current_article.getTitle()
+            content_to_be_posted += "]("
+            content_to_be_posted += post_link
+            content_to_be_posted += ")\n\n"
+            content_to_be_posted += current_article.getText()
+            submission.reply(content_to_be_posted)
+            
+            
