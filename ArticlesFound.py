@@ -1,7 +1,6 @@
 import newspaper
 from newspaper import Article
 
-
 class Articles:
     #Class Varibles
     article_title = ""
