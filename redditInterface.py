@@ -26,7 +26,7 @@ for submission in test.stream.submissions(skip_existing = True): #Opens a stream
     if not submission.is_self: #Only processes posts that contain a link outside of reddit (eg to a news website like daily camera)
     #Validates if the link-post is a link to the daily camera.
         post_link = submission.url #Saves the link contained in the post.
-        daily_camera_detector = post_link.find('dailycamera.com') #Determines if the link is a daily camera link.
+        daily_camera_detector = post_link.find('dailycamera.com/20') #Determines if the link is a daily camera article link.
         
         if not daily_camera_detector == -1: #Only executes if it is a daily camera link.
         #Parse data from the article at post it in the comments of the matching post.
